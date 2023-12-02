@@ -168,7 +168,7 @@ const NavBar = () => {
                 <li className="text-sm relative group h-full flex items-center">
                   <a
                     href="/"
-                    className="hover:font-RobotoBold transition nav"
+                    className="hover:font-RobotoBold transition nav "
                     onMouseEnter={handleRentMouseEnter}
                     onMouseLeave={handleRentMouseLeave}
                   >
