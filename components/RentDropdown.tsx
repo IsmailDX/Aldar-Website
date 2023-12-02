@@ -1,11 +1,11 @@
 import React from "react";
 import { FaArrowRightLong } from "react-icons/fa6";
 
-interface RentDropDownInterface {
+interface RentDropdownInterface {
   isVisible: boolean;
 }
 
-const RentDropdown = ({ isVisible }: RentDropDownInterface) => {
+const RentDropdown = ({ isVisible }: RentDropdownInterface) => {
   return (
     <div
       className={`w-[310px] absolute right-[67px] top-28 bg-black pb-2 px-6 pt-7 border-white border-[1px] ${
