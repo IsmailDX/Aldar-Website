@@ -7,6 +7,7 @@ import { IoIosGlobe } from "react-icons/io";
 import { IoIosSearch } from "react-icons/io";
 import Dropdown from "@/components/Dropdown";
 import BuyDropdown from "./BuyDropDown";
+import RentDropdown from "./RentDropDown";
 
 const links = [
   {
@@ -153,7 +154,11 @@ const NavBar = () => {
                   <RxDividerVertical size={30} />
                   <BuyDropdown
                     isVisible={isBuyDropdownVisible}
-                    isVisible2={isRentDropdownVisible}
+                    // isVisible2={isRentDropdownVisible}
+                  />
+                  <RentDropdown
+                    isVisible={isRentDropdownVisible}
+                    // isVisible2={isRentDropdownVisible}
                   />
                 </div>
 
