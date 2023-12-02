@@ -6,6 +6,7 @@ import { RxDividerVertical } from "react-icons/rx";
 import { IoIosGlobe } from "react-icons/io";
 import { IoIosSearch } from "react-icons/io";
 import Dropdown from "@/components/Dropdown";
+import BuyDropdown from "./BuyDropDown";
 
 const links = [
   {
@@ -70,6 +71,8 @@ const NavBar = () => {
     { optionText: string; optionLink: string }[]
   >([]);
   const [isDropdownHovered, setIsDropdownHovered] = useState(false);
+  const [isBuyDropdownVisible, setIsBuyDropdownVisible] = useState(false);
+  const [isRentDropdownVisible, setIsRentDropdownVisible] = useState(false);
 
   const handleDropdownLeave = () => {
     setIsDropdownHovered(false);
@@ -90,6 +93,24 @@ const NavBar = () => {
 
     updateHoveredOptions();
   }, [hoveredLink]);
+
+  const handleBuyMouseEnter = () => {
+    setIsBuyDropdownVisible(true);
+    setHoveredLink(null);
+  };
+
+  const handleBuyMouseLeave = () => {
+    setIsBuyDropdownVisible(false);
+  };
+
+  const handleRentMouseEnter = () => {
+    setIsRentDropdownVisible(true);
+    setHoveredLink(null);
+  };
+
+  const handleRentMouseLeave = () => {
+    setIsRentDropdownVisible(false);
+  };
 
   return (
     <div className="w-full h-full">
@@ -115,24 +136,34 @@ const NavBar = () => {
             </ul>
           </div>
 
-          <div
-            className="flex items-center w-auto h-full"
-            onMouseEnter={() => setIsDropdownHovered(true)}
-            onMouseLeave={handleDropdownLeave}
-          >
+          <div className="flex items-center w-auto h-full">
             <ul className="text-white list-none flex items-center h-full">
               <div className="flex items-center h-full">
                 <li className="text-sm relative group h-full flex items-center">
-                  <a href="/" className="hover:font-RobotoBold transition nav">
+                  <a
+                    href="/"
+                    className="hover:font-RobotoBold transition nav"
+                    onMouseEnter={handleBuyMouseEnter}
+                    onMouseLeave={handleBuyMouseLeave}
+                  >
                     BUY
                   </a>
                 </li>
                 <div className="px-2">
                   <RxDividerVertical size={30} />
+                  <BuyDropdown
+                    isVisible={isBuyDropdownVisible}
+                    isVisible2={isRentDropdownVisible}
+                  />
                 </div>
 
                 <li className="text-sm relative group h-full flex items-center">
-                  <a href="/" className="hover:font-RobotoBold transition nav">
+                  <a
+                    href="/"
+                    className="hover:font-RobotoBold transition nav"
+                    onMouseEnter={handleRentMouseEnter}
+                    onMouseLeave={handleRentMouseLeave}
+                  >
                     RENT
                   </a>
                 </li>

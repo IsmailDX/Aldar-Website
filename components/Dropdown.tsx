@@ -21,7 +21,7 @@ const Dropdown = ({ options, isVisible, onDropdownLeave }: DropdownProps) => {
             key={option.optionText}
             className="hover:text-white hover:underline"
           >
-            <a href="/">{option.optionText}</a>{" "}
+            <a href="/">{option.optionText}</a>
           </li>
         ))}
       </ul>
