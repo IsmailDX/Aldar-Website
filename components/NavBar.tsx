@@ -7,7 +7,7 @@ import { IoIosGlobe } from "react-icons/io";
 import { IoIosSearch } from "react-icons/io";
 import Dropdown from "@/components/Dropdown";
 import BuyDropdown from "./BuyDropDown";
-import RentDropdown from "./RentDropDown";
+import RentDropdown from "./RentDropdown";
 import Hamburger from "hamburger-react";
 import { IoHomeOutline } from "react-icons/io5";
 import { RiContactsBook2Line } from "react-icons/ri";
