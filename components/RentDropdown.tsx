@@ -5,7 +5,7 @@ interface RentDropDownInterface {
   isVisible: boolean;
 }
 
-const RentDropDown = ({ isVisible }: RentDropDownInterface) => {
+const RentDropdown = ({ isVisible }: RentDropDownInterface) => {
   return (
     <div
       className={`w-[310px] absolute right-[67px] top-28 bg-black pb-2 px-6 pt-7 border-white border-[1px] ${
@@ -47,4 +47,4 @@ const RentDropDown = ({ isVisible }: RentDropDownInterface) => {
   );
 };
 
-export default RentDropDown;
+export default RentDropdown;
