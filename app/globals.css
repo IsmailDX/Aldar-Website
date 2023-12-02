@@ -27,7 +27,7 @@
   }
 
   .nav::after {
-    @apply content-[''] bg-red-500 absolute h-[3px] w-0 left-0 bottom-0 duration-200 opacity-0
+    @apply content-[''] bg-red-500 absolute h-[4px] w-0 left-0 bottom-0 duration-200 opacity-0
   }
 
   .nav:hover::after {

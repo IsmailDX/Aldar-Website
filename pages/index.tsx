@@ -3,11 +3,7 @@ import NavBar from "../components/NavBar";
 import Dropdown from "@/components/Dropdown";
 
 const Home = () => {
-  return (
-    <>
-      <NavBar />
-    </>
-  );
+  return <></>;
 };
 
 export default Home;
