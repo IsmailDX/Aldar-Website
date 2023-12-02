@@ -8,7 +8,7 @@ interface RentDropdownInterface {
 const RentDropdown = ({ isVisible }: RentDropdownInterface) => {
   return (
     <div
-      className={`w-[310px] absolute right-[67px] top-28 bg-black pb-2 px-6 pt-7 border-white border-[1px] ${
+      className={`w-[310px] absolute left-0 top-[110px] bg-black pb-2 px-6 pt-7 border-white border-[1px] ${
         isVisible ? "block" : "hidden"
       } hover:block`}
     >

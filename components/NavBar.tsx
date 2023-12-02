@@ -158,11 +158,11 @@ const NavBar = () => {
                   >
                     BUY
                   </a>
+                  <BuyDropdown isVisible={isBuyDropdownVisible} />
+                  <RentDropdown isVisible={isRentDropdownVisible} />
                 </li>
                 <div className="px-2">
                   <RxDividerVertical size={30} />
-                  <BuyDropdown isVisible={isBuyDropdownVisible} />
-                  <RentDropdown isVisible={isRentDropdownVisible} />
                 </div>
 
                 <li className="text-sm relative group h-full flex items-center">
