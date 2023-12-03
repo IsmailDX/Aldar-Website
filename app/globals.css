@@ -33,3 +33,10 @@
   .nav:hover::after {
     @apply w-full opacity-100
   }
+
+  .swiper-hero {
+    --swiper-theme-color: red;
+    --swiper-pagination-bullet-border-radius: 10px !important;
+    --swiper-pagination-bullet-width: 30px !important;
+  }
+  
