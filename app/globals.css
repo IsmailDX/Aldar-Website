@@ -37,6 +37,12 @@
   .swiper-hero {
     --swiper-theme-color: red;
     --swiper-pagination-bullet-border-radius: 10px !important;
-    --swiper-pagination-bullet-width: 30px !important;
+    --swiper-pagination-bullet-width: 50px !important;
+    --swiper-pagination-bottom: 60px;
+    --swiper-pagination-left: 40px;
+  }
+
+  .swiper-pagination.swiper-pagination-clickable.swiper-pagination-bullets.swiper-pagination-horizontal {
+    left: -501px;
   }
   

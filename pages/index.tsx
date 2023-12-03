@@ -30,15 +30,15 @@ const Home = () => {
         shortSwipes
       >
         <SwiperSlide>
-          <div className="relative w-full h-screen">
-            <div className="absolute w-full h-full top-0 left-0 bg-black/30 z-10" />
+          <div className="relative w-full h-screen text-white">
+            <div className="absolute w-full h-full top-0 left-0 bg-black/60 z-10" />
             <Image
               src="https://fnst.axflare.com/community/JPEG/MzKFqSaBqO.jpeg"
               alt="pic1"
               className="object-cover"
               fill
             />
-            <div className="absolute top-[25%] left-[6rem] space-y-3">
+            <div className="absolute top-[30%] left-[6rem] space-y-3 z-10">
               <h3 className="text-[16px]">Welcome to Aldar Website</h3>
               <h3 className="text-[50px] w-[50%] font-RobotoBold">
                 Check out our amazing deals!
@@ -54,14 +54,14 @@ const Home = () => {
         </SwiperSlide>
 
         <SwiperSlide>
-          <div className="relative">
-            <div className="absolute w-full h-full top-0 left-0 bg-black/30 z-10" />
+          <div className="relative w-full h-screen text-white">
+            <div className="absolute w-full h-full top-0 left-0 bg-black/60 z-10" />
             <img
               src="https://media.licdn.com/dms/image/D4D12AQGPy6n4XA3eiQ/article-cover_image-shrink_720_1280/0/1687039862345?e=2147483647&v=beta&t=reyO4Xm8PwuFc3KlLdSGCxgassaMBixCPJhtcWASBaM"
               alt="pic2"
               className="object-cover w-full"
             />
-            <div className="absolute top-[25%] left-[6rem] space-y-3">
+            <div className="absolute top-[30%] left-[6rem] space-y-3 z-10">
               <h3 className="text-[16px]">Welcome to Aldar Website</h3>
               <h3 className="text-[50px] w-[50%] font-RobotoBold">
                 Check out our amazing deals!
@@ -77,14 +77,14 @@ const Home = () => {
         </SwiperSlide>
 
         <SwiperSlide>
-          <div className="relative">
-            <div className="absolute w-full h-full top-0 left-0 bg-black/30 z-10" />
+          <div className="relative w-full h-screen text-white">
+            <div className="absolute w-full h-full top-0 left-0 bg-black/60 z-10" />
             <img
               src="https://prohomez.com/wp-content/uploads/2022/09/garden-villa-private-pool.jpg"
               alt="pic3"
               className="object-cover w-full"
             />
-            <div className="absolute top-[25%] left-[6rem] space-y-3">
+            <div className="absolute top-[30%] left-[6rem] space-y-3 z-10">
               <h3 className="text-[16px]">Welcome to Aldar Website</h3>
               <h3 className="text-[50px] w-[50%] font-RobotoBold">
                 Check out our amazing deals!
