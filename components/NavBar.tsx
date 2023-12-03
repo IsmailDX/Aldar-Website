@@ -119,7 +119,7 @@ const NavBar = () => {
   };
 
   return (
-    <div className="w-full h-full">
+    <div className="w-full h-fit fixed z-20">
       <div className="w-full bg-black flex justify-center">
         <div className="flex items-center w-full justify-between lg:px-14 px-1 max-w-[1600px]">
           <div className="flex items-center w-auto h-full">
@@ -207,7 +207,7 @@ const NavBar = () => {
       />
       <div
         className={`fixed left-0 w-full h-full bg-black text-white py-7 flex flex-col lg:hidden
-          transition-all ease-in-out duration-300 ${
+          transition-all ease-in-out duration-300 -z-20 ${
             nav ? "top-[11%]" : "-top-[100%]"
           }`}
       >
