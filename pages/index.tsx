@@ -41,53 +41,56 @@ const slidesData = [
 
 const Home = () => {
   return (
-    <Swiper
-      className="relative group h-[37rem] swiper-hero"
-      spaceBetween={50}
-      slidesPerView={1}
-      navigation={{
-        nextEl: ".button-next-slide",
-        prevEl: ".button-prev-slide",
-      }}
-      pagination={{ clickable: true }}
-      modules={[Navigation, Pagination, Autoplay, EffectFade]}
-      autoplay={{ delay: 5000 }}
-      loop
-      effect="fade"
-      fadeEffect={{ crossFade: true }}
-      shortSwipes
-    >
-      {slidesData.map((slide, index) => (
-        <SwiperSlide key={index}>
-          <div className="relative w-full h-full text-white">
-            <div className="absolute w-full h-full top-0 left-0 bg-black/60 z-10" />
-            <img
-              src={slide.imageSrc}
-              alt={`pic${index + 1}`}
-              className="object-cover w-full h-full"
-            />
-            <div className="absolute top-[30%] md:left-[11%] left-0 space-y-3 z-10 flex flex-col md:items-start items-center">
-              <h3 className="text-[16px] md:text-left text-center">
-                {slide.title}
-              </h3>
-              <h3 className="md:text-[50px] text-[35px] md:w-[50%] w-[70%] font-RobotoBold md:text-white md:text-left text-center">
-                {slide.subTitle}
-              </h3>
-              <p className="text-[14px] lg:w-[30%] md:w-[50%] w-[80%] md:text-left text-center">
-                {slide.description}
-              </p>
-              <p>{slide.location}</p>
+    <>
+      <title>Aldar Home Page</title>
+      <Swiper
+        className="relative group h-[37rem] swiper-hero"
+        spaceBetween={50}
+        slidesPerView={1}
+        navigation={{
+          nextEl: ".button-next-slide",
+          prevEl: ".button-prev-slide",
+        }}
+        pagination={{ clickable: true }}
+        modules={[Navigation, Pagination, Autoplay, EffectFade]}
+        autoplay={{ delay: 5000 }}
+        loop
+        effect="fade"
+        fadeEffect={{ crossFade: true }}
+        shortSwipes
+      >
+        {slidesData.map((slide, index) => (
+          <SwiperSlide key={index}>
+            <div className="relative w-full h-full text-white">
+              <div className="absolute w-full h-full top-0 left-0 bg-black/60 z-10" />
+              <img
+                src={slide.imageSrc}
+                alt={`pic${index + 1}`}
+                className="object-cover w-full h-full"
+              />
+              <div className="absolute top-[30%] md:left-[11%] left-0 space-y-3 z-10 flex flex-col md:items-start items-center">
+                <h3 className="text-[16px] md:text-left text-center">
+                  {slide.title}
+                </h3>
+                <h3 className="md:text-[50px] text-[35px] md:w-[50%] w-[70%] font-RobotoBold md:text-white md:text-left text-center">
+                  {slide.subTitle}
+                </h3>
+                <p className="text-[14px] lg:w-[30%] md:w-[50%] w-[80%] md:text-left text-center">
+                  {slide.description}
+                </p>
+                <p>{slide.location}</p>
+              </div>
             </div>
-          </div>
-        </SwiperSlide>
-      ))}
-      <div className="top-[50%] absolute z-50 button-next-slide right-0 duration-500 cursor-pointer">
-        <IoIosArrowForward className="text-white md:w-[60px] md:h-[60px] w-[40px] h-[40px]" />
-      </div>
-      <div className="top-[50%] absolute z-50 button-prev-slide left-0 duration-500 cursor-pointer">
-        <IoIosArrowBack className="text-white md:w-[60px] md:h-[60px] w-[40px] h-[40px]" />
-      </div>
-    </Swiper>
+          </SwiperSlide>
+        ))}
+        <div className="top-[50%] absolute z-50 button-next-slide right-0 duration-500 cursor-pointer">
+          <IoIosArrowForward className="text-white md:w-[60px] md:h-[60px] w-[40px] h-[40px]" />
+        </div>
+        <div className="top-[50%] absolute z-50 button-prev-slide left-0 duration-500 cursor-pointer">
+          <IoIosArrowBack className="text-white md:w-[60px] md:h-[60px] w-[40px] h-[40px]" />
+        </div>
+      </Swiper>
+    </>
   );
 };
 export default Home;

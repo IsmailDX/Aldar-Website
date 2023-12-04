@@ -37,11 +37,16 @@
   .swiper-hero {
     --swiper-theme-color: rgb(255, 255, 255);
     --swiper-pagination-bullet-border-radius: 10px !important;
-    --swiper-pagination-bullet-width: 50px !important;
+    --swiper-pagination-bullet-width: 30px !important;
     --swiper-pagination-bottom: 5%;
     --swiper-pagination-left: 40px;
     --swiper-pagination-bullet-inactive-color: white;
     --swiper-pagination-bullet-inactive-opacity: 0.3;
+   
+  }
+  
+  .swiper-pagination-bullet-active {
+    --swiper-pagination-bullet-width: 50px !important;
   }
 
   .swiper-pagination.swiper-pagination-clickable.swiper-pagination-bullets.swiper-pagination-horizontal {
@@ -53,4 +58,6 @@
       left: 0;
     }
   }
+
+ 
   
