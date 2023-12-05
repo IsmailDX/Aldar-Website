@@ -49,7 +49,7 @@ const Dropdown = ({
       )}
       {options && (
         <div>
-          <ul className="w-fit px-14 text-[17px] font-semibold font-RobotoLight text-gray-300 border-r-[1px] border-stone-700 space-y-2">
+          <ul className="w-fit px-14 text-[17px] font-semibold font-RobotoLight text-gray-400 border-r-[1px] border-stone-700 space-y-2">
             {options.map((option) => (
               <li
                 key={option.optionText}
