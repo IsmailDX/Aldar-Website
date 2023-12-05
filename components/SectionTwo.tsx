@@ -4,7 +4,7 @@ const SectionTwo = () => {
   return (
     <div
       className="lg:max-w-[78%] md:max-w-[70%] flex lg:flex-row flex-col mx-auto justify-center py-16 lg:space-x-16 md:space-x-16 space-x-6 
-    md:px-0 px-10 md:space-y-0 space-y-14"
+    md:px-0 px-10 md:space-y-0 space-y-14 select-none"
     >
       <div className="max-w-[46%] relative">
         <div className="md:w-56 md:h-56 w-36 h-36 bg-gray-300/30 absolute -z-10"></div>
