@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
-import FilterDropdown from "./FilterDropdown";
+import FilterDropdown from "./DropDowns/FilterDropdown";
 
 const Filter = () => {
   const [openDest, setOpenDest] = useState(false);
