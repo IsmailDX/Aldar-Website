@@ -187,21 +187,21 @@ const Filter = () => {
       </div>
       {openFilterPage && (
         <div className="fixed top-0 left-0 w-full h-full bg-white z-50 overflow-auto flex flex-col">
-          <div className="w-full flex flex-col">
-            <button
-              className="fixed left-[20px] top-[54px] flex items-center font-RobotoBold text-gray-700"
-              onClick={() => setOpenFilterPage(!openFilterPage)}
-            >
-              <IoClose size={25} /> Close
-            </button>
-            <div className="flex flex-col w-full space-y-7 overflow-y-scroll -z-10">
-              <div
-                className="flex w-full justify-center fixed top-0 pt-14 pb-4 border-b-[1px] border-gray-200
+          <button
+            className="fixed left-[20px] top-[54px] flex items-center font-RobotoBold text-gray-700"
+            onClick={() => setOpenFilterPage(!openFilterPage)}
+          >
+            <IoClose size={25} /> Close
+          </button>
+          <div className="flex flex-col w-full overflow-y-scroll -z-10">
+            <div
+              className="flex w-full justify-center fixed top-0 pt-14 pb-4 border-b-[1px] border-gray-200
              bg-white z-10"
-              >
-                <p className="font-RobotoBold">Filters</p>
-              </div>
+            >
+              <p className="font-RobotoBold">Filters</p>
+            </div>
 
+            <div className="space-y-7 pt-[125px]">
               <FilterDropdown
                 label="Destination"
                 isOpen={openDest}
