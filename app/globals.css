@@ -59,5 +59,9 @@
     }
   }
 
+  .filterlogos {
+    @apply flex justify-center items-center p-3 space-x-3 w-fit whitespace-nowrap flex-shrink-0
+  }
+
  
   
