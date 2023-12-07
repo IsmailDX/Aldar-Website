@@ -206,7 +206,7 @@ const NavBar = () => {
         onDropdownLeave={handleDropdownLeave}
       />
       <div
-        className={`fixed left-0 w-full h-full bg-black text-white py-7 flex flex-col lg:hidden
+        className={`fixed left-0 w-full h-[100dvh] bg-black text-white py-7 flex flex-col lg:hidden
           transition-all ease-in-out duration-300 -z-20 ${
             nav ? "top-[11%]" : "-top-[100%]"
           }`}

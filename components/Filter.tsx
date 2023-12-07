@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
+import { LuSettings2 } from "react-icons/lu";
 import FilterDropdown from "./DropDowns/FilterDropdown";
+import { FaArrowsUpDown } from "react-icons/fa6";
 
 const Filter = () => {
   const [openDest, setOpenDest] = useState(false);
@@ -19,7 +21,7 @@ const Filter = () => {
 
   return (
     <div className="flex justify-center py-14 ">
-      <div className="max-w-[1100px] w-[100%] shadow-lg shadow-black/5 flex flex-col relative px-10 py-7 space-y-9">
+      <div className="max-w-[1100px] w-[100%] shadow-lg shadow-black/5 lg:flex hidden flex-col relative px-10 py-7 space-y-9">
         <div className="flex items-center relative justify-between">
           <div className="flex">
             <FilterDropdown
@@ -154,6 +156,22 @@ const Filter = () => {
             </div>
           </div>
         )}
+      </div>
+      {/* Mobile */}
+      <div className="flex lg:hidden w-full">
+        <FilterDropdown
+          label="Filters"
+          isOpen={openDest}
+          toggleDropdown={toggleDestDropdown}
+          icon={<LuSettings2 className="text-gray-500" size={25} />}
+        />
+
+        <FilterDropdown
+          label="Title (A-Z)"
+          isOpen={openDest}
+          toggleDropdown={toggleDestDropdown}
+          icon={<FaArrowsUpDown className="text-gray-500" size={25} />}
+        />
       </div>
     </div>
   );
