@@ -4,7 +4,7 @@ import { IoIosArrowDown } from "react-icons/io";
 interface FilterDropdownInterface {
   label: string;
   isOpen: boolean;
-  toggleDropdown: () => void;
+  toggleDropdown?: () => void;
   icon?: React.ReactNode;
 }
 
