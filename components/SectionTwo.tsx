@@ -1,4 +1,5 @@
 import React from "react";
+import AnimatedContainer from "./shared/AnimatedContainer";
 
 const SectionTwo = () => {
   return (
@@ -7,7 +8,16 @@ const SectionTwo = () => {
     md:px-0 px-10 md:space-y-0 space-y-14 select-none"
     >
       <div className="max-w-[46%] relative">
-        <div className="md:w-56 md:h-56 w-36 h-36 bg-gray-300/30 absolute -z-10"></div>
+        <AnimatedContainer
+          initialClassName="translate-x-[-500px]"
+          transitionClassName="transition-all duration-500"
+          whileInViewClassName="translate-x-0"
+          className="absolute -z-10"
+          once
+        >
+          <div className="md:w-56 md:h-56 w-36 h-36 bg-gray-300/30" />
+        </AnimatedContainer>
+
         <h1 className="font-RobotoBold md:text-[50px] text-[35px] pt-7 md:pl-16 pl-6 md:leading-[60px] leading-[40px] max-w-xs">
           Residentials for Sale
         </h1>
