@@ -31,6 +31,9 @@ const Filter = () => {
   const [openFilter, setOpenFilter] = useState(false);
   const [openFilterPage, setOpenFilterPage] = useState(false);
   const [properties, setProperties] = useState<Property[]>([]);
+  const [selectedUnitType, setSelectedUnitType] = useState("");
+  const [filteredProperties, setFilteredProperties] = useState<Property[]>([]);
+  const [resultsCount, setResultsCount] = useState(filteredProperties.length);
 
   const toggleDestDropdown = () => {
     setOpenDest(!openDest);
@@ -53,11 +56,29 @@ const Filter = () => {
       });
   }, []);
 
+  useEffect(() => {
+    const filteredProperties = properties.filter((property) =>
+      selectedUnitType ? property.unitType === selectedUnitType : true
+    );
+
+    setFilteredProperties(filteredProperties);
+
+    const timeoutId = setTimeout(() => {
+      setResultsCount(filteredProperties.length);
+    }, 0);
+
+    return () => clearTimeout(timeoutId); // Cleanup function
+  }, [properties, selectedUnitType]);
+
+  const handleUnitTypeSelect = (unitType: string) => {
+    setSelectedUnitType(unitType);
+  };
+
   return (
     <div className={`${openFilterPage ? "h-[100dvh] relative" : "h-full"}`}>
       <div className="flex justify-center">
         <div className="max-w-[1100px] w-[100%] lg:shadow-lg shadow-black/5 flex flex-col relative lg:pl-10 px-0 py-7 space-y-9">
-          <LogoFilter />
+          <LogoFilter onSelect={handleUnitTypeSelect} />
           <div className="lg:flex hidden items-center relative justify-between">
             <div className="flex">
               <FilterDropdown
@@ -114,14 +135,10 @@ const Filter = () => {
                   className={`
          bg-white py-5 px-5 flex justify-center items-center space-x-3 cursor-pointer`}
                   onClick={() => {}}
-                >
-                  <p className="font-semibold text-black text-[15px] select-none">
-                    Clear Filters
-                  </p>
-                </div>
+                ></div>
                 <div className="w-fit bg-gray-900 flex justify-center items-center">
                   <p className="p-5 font-RobotoBold text-white ">
-                    Show (0) Results
+                    Show ({resultsCount}) Results
                   </p>
                 </div>
               </div>
@@ -181,15 +198,11 @@ const Filter = () => {
                 className={`
        bg-white py-5 flex justify-center items-center cursor-pointer`}
                 onClick={() => {}}
-              >
-                <p className="font-semibold text-black text-[15px] select-none pr-5">
-                  Clear Filters
-                </p>
-              </div>
+              ></div>
 
               <div className="w-fit bg-gray-900 flex justify-center items-center">
                 <p className="p-5 font-RobotoBold text-white ">
-                  Show (0) Results
+                  Show ({resultsCount}) Results
                 </p>
               </div>
             </div>
@@ -249,13 +262,17 @@ const Filter = () => {
           </div>
         </div>
       )}
-      <div className="w-full flex flex-col justify-center py-28 2xl:max-w-[1200px] lg:max-w-[1000px] md:max-w-[700px] mx-auto space-y-10 overflow-hidden">
+      <div className="w-full flex flex-col justify-center py-20 2xl:max-w-[1200px] lg:max-w-[1000px] md:max-w-[700px] mx-auto space-y-10 overflow-hidden">
         <h1 className="text-[35px] font-RobotoBold pb-10 md:pl-0 pl-5">
-          Apartments
+          {selectedUnitType || "All Properties"}
         </h1>
-        {properties.map((property) => (
-          <Properties key={property.id} property={property} />
-        ))}
+        {properties
+          .filter((property) =>
+            selectedUnitType ? property.unitType === selectedUnitType : true
+          )
+          .map((property) => (
+            <Properties key={property.id} property={property} />
+          ))}
       </div>
     </div>
   );
