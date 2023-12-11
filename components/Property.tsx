@@ -13,6 +13,7 @@ type Property = {
   propertyName: string;
   price: number;
   location: string;
+  locationDetails: string;
   unitType: string;
   bedrooms: number;
   carParking: number;
@@ -61,7 +62,7 @@ const Property = () => {
                 {property.propertyName}
               </h1>
               <h3 className="font-RobotoBold text-gray-700 pb-5 lg:text-[17px] text-[14px]">
-                In Alghadder
+                {property.locationDetails}
               </h3>
 
               <div className="flex items-center space-x-3 pb-4">
@@ -78,16 +79,8 @@ const Property = () => {
                   BUY FROM
                 </h4>
                 <p className="lg:text-[14px] text-gray-600">
-                  AED{" "}
-                  <span className="text-[18px] font-semibold text-black">
-                    {property.price}
-                  </span>
-                  <span className="text-[20px] font-bold text-gray-600">
-                    {" "}
-                    -{" "}
-                  </span>
-                  <span className="text-[18px] font-semibold text-black">
-                    {" "}
+                  AED
+                  <span className="text-[18px] font-semibold text-black pl-1">
                     {property.price}
                   </span>
                 </p>
