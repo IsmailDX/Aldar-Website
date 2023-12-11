@@ -47,9 +47,9 @@ const Property = () => {
       {properties.map((property) => (
         <div
           key={property.id}
-          className="2xl:w-[70%] w-[90%] lg:pl-16 lg:pr-0 pl-4 pr-4 pt-64 flex border border-gray-200 relative"
+          className="2xl:w-[70%] w-[90%] lg:pl-16 lg:pr-0 pl-4 pr-4 lg:pt-8 pt-64 flex border border-gray-300 relative"
         >
-          <div className="flex flex-col w-full">
+          <div className="flex flex-col 2xl:w-full lg:w-[50%] w-full">
             <div
               className="bg-gray-100 w-fit text-gray-400 font-RobotoBold lg:text-[12px] text-[10px] py-2 px-1 
           border border-gray-200 uppercase tracking-widest"
@@ -122,7 +122,7 @@ const Property = () => {
           </div>
 
           <div className="w-full absolute 2xl:-right-[80%] lg:-right-[60%] -right-[10%] lg:bottom-0 top-5">
-            <div className="w-[100%] h-[220px] relative">
+            <div className="lg:w-[500px] w-[100%] lg:h-[400px] h-[220px] relative">
               <Image
                 src={property.propertyPhoto}
                 alt="property"
