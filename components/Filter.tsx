@@ -28,20 +28,29 @@ interface ApiResponse {
 const Filter = () => {
   const [openDest, setOpenDest] = useState(false);
   const [openPro, setOpenPro] = useState(false);
-  const [openFilter, setOpenFilter] = useState(false);
+  const [openBedrooms, setOpenBedrooms] = useState(false);
   const [openFilterPage, setOpenFilterPage] = useState(false);
   const [properties, setProperties] = useState<Property[]>([]);
   const [selectedUnitType, setSelectedUnitType] = useState("");
   const [filteredProperties, setFilteredProperties] = useState<Property[]>([]);
   const [resultsCount, setResultsCount] = useState(filteredProperties.length);
+  const [filterOn, setFilterOn] = useState(false);
 
   const toggleDestDropdown = () => {
     setOpenDest(!openDest);
     setOpenPro(false);
+    setOpenBedrooms(false);
   };
 
   const toggleProDropdown = () => {
     setOpenPro(!openPro);
+    setOpenDest(false);
+    setOpenBedrooms(false);
+  };
+
+  const toggleBedroomsDropdown = () => {
+    setOpenBedrooms(!openBedrooms);
+    setOpenPro(false);
     setOpenDest(false);
   };
 
@@ -74,6 +83,33 @@ const Filter = () => {
     setSelectedUnitType(unitType);
   };
 
+  const handleBedroomsSelect = (bedrooms: number) => {
+    axios
+      .get(`http://127.0.0.1:8000/propertiesByBedrooms/${bedrooms}/`)
+      .then((response) => {
+        const updatedFilteredProperties = response.data.properties.filter(
+          (property: Property) =>
+            selectedUnitType ? property.unitType === selectedUnitType : true
+        );
+        setFilteredProperties(updatedFilteredProperties);
+        setResultsCount(updatedFilteredProperties.length);
+      })
+      .catch((error) => {
+        console.error("Error fetching data:", error);
+      });
+    setFilterOn(false);
+  };
+
+  const clearFilters = () => {
+    setSelectedUnitType("");
+    setFilteredProperties(properties);
+    setFilterOn(true);
+  };
+
+  useEffect(() => {
+    setResultsCount(filteredProperties.length);
+  }, [filteredProperties]);
+
   return (
     <div className={`${openFilterPage ? "h-[100dvh] relative" : "h-full"}`}>
       <div className="flex justify-center">
@@ -93,120 +129,35 @@ const Filter = () => {
                 toggleDropdown={toggleProDropdown}
               />
 
-              <div
-                className={`bg-white py-5 px-5 flex justify-center items-center space-x-3 cursor-pointer`}
-                onClick={() => {
-                  setOpenFilter(!openFilter);
-                  setOpenPro(false);
-                  setOpenDest(false);
-                }}
-              >
-                {!openFilter ? (
-                  <>
-                    <p className="font-RobotoBold text-black text-[15px] select-none">
-                      More Filters
-                    </p>
-
-                    <IoIosArrowDown className="text-red-500" />
-                  </>
-                ) : null}
-              </div>
-            </div>
-
-            {openFilter ? (
-              <div className="pr-10">
-                <div
-                  className={`bg-gray-300/25 py-3 px-5 flex justify-center items-center space-x-3 cursor-pointer`}
-                  onClick={() => {
-                    setOpenFilter(!openFilter);
-                    setOpenPro(false);
-                    setOpenDest(false);
-                  }}
-                >
-                  <p className="font-RobotoBold text-black text-[15px] select-none">
-                    Less Filters
-                  </p>
-                  <IoIosArrowUp className="text-red-500" />
-                </div>
-              </div>
-            ) : (
-              <div className="flex items-center pr-10">
-                <div
-                  className={`
-         bg-white py-5 px-5 flex justify-center items-center space-x-3 cursor-pointer`}
-                  onClick={() => {}}
-                ></div>
-                <div className="w-fit bg-gray-900 flex justify-center items-center">
-                  <p className="p-5 font-RobotoBold text-white ">
-                    Show ({resultsCount}) Results
-                  </p>
-                </div>
-              </div>
-            )}
-          </div>
-
-          {openFilter && (
-            <div className="lg:flex hidden items-center">
               <FilterDropdown
                 label="Bedrooms"
-                isOpen={openPro}
-                toggleDropdown={toggleProDropdown}
+                isOpen={openBedrooms}
+                toggleDropdown={toggleBedroomsDropdown}
+                onChange={handleBedroomsSelect}
+                options={[1, 2, 3, 4, 5]}
+                filterOn={filterOn}
               />
-
-              <FilterDropdown
-                label="Bathrooms"
-                isOpen={openPro}
-                toggleDropdown={toggleProDropdown}
-              />
-
-              <FilterDropdown
-                label="Status"
-                isOpen={openPro}
-                toggleDropdown={toggleProDropdown}
-              />
-
-              <FilterDropdown
-                label="Budget"
-                isOpen={openPro}
-                toggleDropdown={toggleProDropdown}
-              />
-
-              <FilterDropdown
-                label="Size"
-                isOpen={openPro}
-                toggleDropdown={toggleProDropdown}
-              />
-
-              <input
-                id="default-checkbox"
-                type="checkbox"
-                value=""
-                className="w-5 h-5 ml-7"
-              />
-              <label
-                htmlFor="default-checkbox"
-                className="pl-2 text-md font-medium text-gray-900 font-RobotoBold"
-              >
-                Offers
-              </label>
             </div>
-          )}
-
-          {openFilter && (
-            <div className="lg:flex hidden items-center">
+            <div className="flex items-center pr-10 space-x-2">
               <div
                 className={`
-       bg-white py-5 flex justify-center items-center cursor-pointer`}
-                onClick={() => {}}
-              ></div>
-
-              <div className="w-fit bg-gray-900 flex justify-center items-center">
+         bg-white flex justify-center items-center cursor-pointer`}
+                onClick={clearFilters}
+              >
+                <p
+                  className="font-semibold text-black text-[15px] select-none 
+                hover:bg-gray-100 transition-all p-5"
+                >
+                  Clear Filters
+                </p>
+              </div>
+              <div className="flex w-fit bg-gray-900 mr-10 justify-center items-center">
                 <p className="p-5 font-RobotoBold text-white ">
                   Show ({resultsCount}) Results
                 </p>
               </div>
             </div>
-          )}
+          </div>
 
           {/* Mobile */}
           <div className="flex lg:hidden w-full">
@@ -246,7 +197,7 @@ const Filter = () => {
               <p className="font-RobotoBold">Filters</p>
             </div>
 
-            <div className="space-y-7 pt-[125px]">
+            <div className="space-y-7 pt-[125px] h-[100dvh]">
               <FilterDropdown
                 label="Destination"
                 isOpen={openDest}
@@ -258,6 +209,14 @@ const Filter = () => {
                 isOpen={openPro}
                 toggleDropdown={toggleProDropdown}
               />
+
+              <FilterDropdown
+                label="Bedrooms"
+                isOpen={openBedrooms}
+                toggleDropdown={toggleBedroomsDropdown}
+                onChange={handleBedroomsSelect}
+                options={[1, 2, 3, 4, 5]}
+              />
             </div>
           </div>
         </div>
@@ -266,13 +225,15 @@ const Filter = () => {
         <h1 className="text-[35px] font-RobotoBold pb-10 md:pl-0 pl-5">
           {selectedUnitType || "All Properties"}
         </h1>
-        {properties
-          .filter((property) =>
-            selectedUnitType ? property.unitType === selectedUnitType : true
-          )
-          .map((property) => (
+        {filteredProperties.length === 0 ? (
+          <p className="text-center text-gray-500 text-[20px] font-RobotoBold">
+            Sorry, no properties match your selected filters.
+          </p>
+        ) : (
+          filteredProperties.map((property) => (
             <Properties key={property.id} property={property} />
-          ))}
+          ))
+        )}
       </div>
     </div>
   );

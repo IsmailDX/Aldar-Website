@@ -16,8 +16,8 @@ const Dropdown = ({
 }: DropdownProps) => {
   return (
     <div
-      className={`w-screen bg-black pb-10 pl-44 pt-11 ${
-        isVisible ? "flex" : "hidden"
+      className={`w-screen bg-black pb-10 pl-44 pt-11  ${
+        isVisible ? "flex z-30" : "hidden"
       }`}
       onMouseLeave={onDropdownLeave}
     >
