@@ -11,7 +11,7 @@ type Property = {
   propertyName: string;
   price: number;
   location: string;
-  locationDetails: string;
+  project: string;
   unitType: string;
   bedrooms: number;
   carParking: number;
@@ -42,7 +42,7 @@ const Property = ({ property }: PropertyProps) => {
             {property.propertyName}
           </h1>
           <h3 className="font-RobotoBold text-gray-700 pb-5 lg:text-[17px] text-[14px]">
-            {property.locationDetails}
+            In {property.project}
           </h3>
 
           <div className="flex items-center space-x-3 pb-4">

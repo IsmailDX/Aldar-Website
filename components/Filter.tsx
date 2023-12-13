@@ -13,7 +13,7 @@ type Property = {
   propertyName: string;
   price: number;
   location: string;
-  locationDetails: string;
+  project: string;
   unitType: string;
   bedrooms: number;
   carParking: number;
@@ -100,6 +100,23 @@ const Filter = () => {
     setFilterOn(false);
   };
 
+  const handleProjectSelect = (project: string) => {
+    axios
+      .get(`http://127.0.0.1:8000/propertiesByProject/${project}/`)
+      .then((response) => {
+        const updatedFilteredProperties = response.data.properties.filter(
+          (property: Property) =>
+            selectedUnitType ? property.unitType === selectedUnitType : true
+        );
+        setFilteredProperties(updatedFilteredProperties);
+        setResultsCount(updatedFilteredProperties.length);
+      })
+      .catch((error) => {
+        console.error("Error fetching data:", error);
+      });
+    setFilterOn(false);
+  };
+
   const clearFilters = () => {
     setSelectedUnitType("");
     setFilteredProperties(properties);
@@ -127,14 +144,23 @@ const Filter = () => {
                 label="Project"
                 isOpen={openPro}
                 toggleDropdown={toggleProDropdown}
+                onChangePro={handleProjectSelect}
+                projectOptions={[
+                  "Alghadeer",
+                  "Modern And Waterfront Living With Waters Edge",
+                  "Ansam",
+                  "Traditional And Modern Living With Alreeman - Aldar",
+                  "Poolside Townhouses And Grand Views Of Lea Yas Island",
+                ]}
+                filterOn={filterOn}
               />
 
               <FilterDropdown
                 label="Bedrooms"
                 isOpen={openBedrooms}
                 toggleDropdown={toggleBedroomsDropdown}
-                onChange={handleBedroomsSelect}
-                options={[1, 2, 3, 4, 5]}
+                onChangeBed={handleBedroomsSelect}
+                bedroomOptions={[1, 2, 3, 4, 5]}
                 filterOn={filterOn}
               />
             </div>
@@ -208,14 +234,24 @@ const Filter = () => {
                 label="Project"
                 isOpen={openPro}
                 toggleDropdown={toggleProDropdown}
+                onChangePro={handleProjectSelect}
+                projectOptions={[
+                  "Alghadeer",
+                  "Modern And Waterfront Living With Waters Edge",
+                  "Ansam",
+                  "Traditional And Modern Living With Alreeman - Aldar",
+                  "Poolside Townhouses And Grand Views Of Lea Yas Island",
+                ]}
+                filterOn={filterOn}
               />
 
               <FilterDropdown
                 label="Bedrooms"
                 isOpen={openBedrooms}
                 toggleDropdown={toggleBedroomsDropdown}
-                onChange={handleBedroomsSelect}
-                options={[1, 2, 3, 4, 5]}
+                onChangeBed={handleBedroomsSelect}
+                bedroomOptions={[1, 2, 3, 4, 5]}
+                filterOn={filterOn}
               />
             </div>
           </div>
