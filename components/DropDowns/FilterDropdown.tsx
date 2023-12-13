@@ -5,22 +5,18 @@ interface FilterDropdownInterface {
   label: string;
   isOpen: boolean;
   toggleDropdown?: () => void;
-  icon?: React.ReactNode;
-  onChangeBed?: (selectedOptions: number) => void;
-  onChangePro?: (selectedOptions: string) => void;
-  bedroomOptions?: number[];
-  projectOptions?: string[];
+  onChange?: (selectedOption: string | number, isBedroom?: boolean) => void;
+  options?: (string | number)[];
   filterOn?: boolean;
+  icon?: React.ReactNode;
 }
 
 const FilterDropdown = ({
   label,
   isOpen,
   toggleDropdown,
-  onChangeBed,
-  onChangePro,
-  bedroomOptions = [],
-  projectOptions = [],
+  onChange,
+  options = [],
   filterOn,
   icon = <IoIosArrowDown className="text-gray-500" />,
 }: FilterDropdownInterface) => {
@@ -29,28 +25,42 @@ const FilterDropdown = ({
   const [selectedProjectLabel, setSelectedProjectLabel] =
     useState<string>(label);
 
-  useEffect(() => {
-    if (filterOn) {
-      setSelectedBedroomLabel(label);
-      setSelectedProjectLabel(label);
+  const handleOptionSelect = (option: string | number, isBedroom?: boolean) => {
+    toggleDropdown && toggleDropdown();
+    onChange && onChange(option, isBedroom);
+
+    // Update the selected labels based on the current label
+    if (label === "Bedrooms") {
+      setSelectedBedroomLabel(
+        option && option.toString().length > 12
+          ? truncateOption(option.toString())
+          : option.toString()
+      );
+    } else {
+      setSelectedProjectLabel(
+        option && option.toString().length > 12
+          ? truncateOption(option.toString())
+          : option.toString()
+      );
     }
-  }, [filterOn, label]);
-
-  const handleBedroomOptionSelect = (option: number) => {
-    setSelectedBedroomLabel(`${option}-Bedroom`);
-    toggleDropdown && toggleDropdown();
-    onChangeBed && onChangeBed(option);
-  };
-
-  const handleProjectOptionSelect = (option: string) => {
-    setSelectedProjectLabel(`${option}`);
-    toggleDropdown && toggleDropdown();
-    onChangePro && onChangePro(option);
   };
 
   const truncateOption = (option: string) => {
     return option.length > 7 ? `${option.slice(0, 10)}..` : option;
   };
+
+  useEffect(() => {
+    if (filterOn) {
+      // Update the selected labels based on the current label
+      if (label === "Bedrooms") {
+        setSelectedBedroomLabel(label);
+        setSelectedProjectLabel(selectedProjectLabel);
+      } else {
+        setSelectedProjectLabel(label);
+        setSelectedBedroomLabel(selectedBedroomLabel);
+      }
+    }
+  }, [filterOn, label]);
 
   return (
     <div
@@ -73,25 +83,15 @@ const FilterDropdown = ({
       {icon}
       {isOpen && (
         <ul className="absolute top-[68px] -left-3 w-[300px] shadow-lg shadow-black/5 overflow-y-auto h-fit max-h-32 z-20">
-          {label === "Bedrooms"
-            ? bedroomOptions.map((option) => (
-                <li
-                  key={option}
-                  className={`pl-5 py-3 bg-white hover:bg-gray-100`}
-                  onClick={() => handleBedroomOptionSelect(option)}
-                >
-                  {option}-Bedroom
-                </li>
-              ))
-            : projectOptions.map((option) => (
-                <li
-                  key={option}
-                  className={`pl-5 py-3 bg-white hover:bg-gray-100`}
-                  onClick={() => handleProjectOptionSelect(option)}
-                >
-                  {option}
-                </li>
-              ))}
+          {options.map((option) => (
+            <li
+              key={option}
+              className={`pl-5 py-3 bg-white hover:bg-gray-100`}
+              onClick={() => handleOptionSelect(option, label === "Bedrooms")}
+            >
+              {label === "Bedrooms" ? `${option}-Bedroom` : option}
+            </li>
+          ))}
         </ul>
       )}
     </div>

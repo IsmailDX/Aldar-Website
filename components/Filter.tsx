@@ -35,6 +35,9 @@ const Filter = () => {
   const [filteredProperties, setFilteredProperties] = useState<Property[]>([]);
   const [resultsCount, setResultsCount] = useState(filteredProperties.length);
   const [filterOn, setFilterOn] = useState(false);
+  const [selectedOptions, setSelectedOptions] = useState<
+    [number | false, string | false, false]
+  >([false, false, false]);
 
   const toggleDestDropdown = () => {
     setOpenDest(!openDest);
@@ -55,14 +58,18 @@ const Filter = () => {
   };
 
   useEffect(() => {
-    axios
-      .get<ApiResponse>("http://127.0.0.1:8000/allProperties/")
-      .then((response) => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get<ApiResponse>(
+          "http://127.0.0.1:8000/allProperties/"
+        );
         setProperties(response.data.properties);
-      })
-      .catch((error) => {
+      } catch (error) {
         console.error("Error fetching data:", error);
-      });
+      }
+    };
+
+    fetchData();
   }, []);
 
   useEffect(() => {
@@ -83,42 +90,76 @@ const Filter = () => {
     setSelectedUnitType(unitType);
   };
 
-  const handleBedroomsSelect = (bedrooms: number) => {
-    axios
-      .get(`http://127.0.0.1:8000/propertiesByBedrooms/${bedrooms}/`)
-      .then((response) => {
-        const updatedFilteredProperties = response.data.properties.filter(
-          (property: Property) =>
-            selectedUnitType ? property.unitType === selectedUnitType : true
-        );
-        setFilteredProperties(updatedFilteredProperties);
-        setResultsCount(updatedFilteredProperties.length);
-      })
-      .catch((error) => {
-        console.error("Error fetching data:", error);
-      });
-    setFilterOn(false);
+  // Update the state based on the selected option
+  const handleSelect = (
+    selectedOption: string | number,
+    isBedroom?: boolean
+  ) => {
+    if (isBedroom) {
+      setSelectedOptions([
+        selectedOption as number,
+        selectedOptions[1],
+        selectedOptions[2],
+      ]);
+    } else {
+      setSelectedOptions([
+        selectedOptions[0],
+        selectedOption as string,
+        selectedOptions[2],
+      ]);
+    }
   };
 
-  const handleProjectSelect = (project: string) => {
-    axios
-      .get(`http://127.0.0.1:8000/propertiesByProject/${project}/`)
-      .then((response) => {
+  // Use the useEffect hook outside the component body
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        // Check if both bedroom and project values are selected
+        const isBothSelected =
+          selectedOptions[0] !== false && selectedOptions[1] !== false;
+
+        let response;
+
+        if (isBothSelected) {
+          const [bedrooms, project] = selectedOptions;
+          response = await axios.get(
+            `http://127.0.0.1:8000/propertiesByBedroomsAndProject/${project}/${bedrooms}`
+          );
+        } else if (selectedOptions[0] !== false) {
+          // Bedroom is selected
+          response = await axios.get(
+            `http://127.0.0.1:8000/propertiesByBedrooms/${selectedOptions[0]}/`
+          );
+        } else if (selectedOptions[1] !== false) {
+          // Project is selected
+          response = await axios.get(
+            `http://127.0.0.1:8000/propertiesByProject/${selectedOptions[1]}/`
+          );
+        } else {
+          // None is selected, reset the properties
+          setFilteredProperties(properties);
+          setResultsCount(properties.length);
+          return; // Early return to prevent unnecessary updates
+        }
+
         const updatedFilteredProperties = response.data.properties.filter(
           (property: Property) =>
             selectedUnitType ? property.unitType === selectedUnitType : true
         );
         setFilteredProperties(updatedFilteredProperties);
         setResultsCount(updatedFilteredProperties.length);
-      })
-      .catch((error) => {
+        setFilterOn(false); // Reset filter flag
+      } catch (error) {
         console.error("Error fetching data:", error);
-      });
-    setFilterOn(false);
-  };
+      }
+    };
+
+    fetchData();
+  }, [selectedOptions, filterOn, properties, selectedUnitType]);
 
   const clearFilters = () => {
     setSelectedUnitType("");
+    setSelectedOptions([false, false, false]);
     setFilteredProperties(properties);
     setFilterOn(true);
   };
@@ -144,8 +185,8 @@ const Filter = () => {
                 label="Project"
                 isOpen={openPro}
                 toggleDropdown={toggleProDropdown}
-                onChangePro={handleProjectSelect}
-                projectOptions={[
+                onChange={handleSelect}
+                options={[
                   "Alghadeer",
                   "Modern And Waterfront Living With Waters Edge",
                   "Ansam",
@@ -159,8 +200,8 @@ const Filter = () => {
                 label="Bedrooms"
                 isOpen={openBedrooms}
                 toggleDropdown={toggleBedroomsDropdown}
-                onChangeBed={handleBedroomsSelect}
-                bedroomOptions={[1, 2, 3, 4, 5]}
+                onChange={handleSelect}
+                options={[1, 2, 3, 4, 5]}
                 filterOn={filterOn}
               />
             </div>
@@ -234,8 +275,8 @@ const Filter = () => {
                 label="Project"
                 isOpen={openPro}
                 toggleDropdown={toggleProDropdown}
-                onChangePro={handleProjectSelect}
-                projectOptions={[
+                onChange={handleSelect}
+                options={[
                   "Alghadeer",
                   "Modern And Waterfront Living With Waters Edge",
                   "Ansam",
@@ -249,8 +290,8 @@ const Filter = () => {
                 label="Bedrooms"
                 isOpen={openBedrooms}
                 toggleDropdown={toggleBedroomsDropdown}
-                onChangeBed={handleBedroomsSelect}
-                bedroomOptions={[1, 2, 3, 4, 5]}
+                onChange={handleSelect}
+                options={[1, 2, 3, 4, 5]}
                 filterOn={filterOn}
               />
             </div>
