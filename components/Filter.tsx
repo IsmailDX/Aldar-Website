@@ -36,8 +36,8 @@ const Filter = () => {
   const [resultsCount, setResultsCount] = useState(filteredProperties.length);
   const [filterOn, setFilterOn] = useState(false);
   const [selectedOptions, setSelectedOptions] = useState<
-    [number | false, string | false, false]
-  >([false, false, false]);
+    [number | false, string | false, string | false, false]
+  >([false, false, false, false]);
 
   const toggleDestDropdown = () => {
     setOpenDest(!openDest);
@@ -86,12 +86,14 @@ const Filter = () => {
         selectedOption as number,
         selectedOptions[1],
         selectedOptions[2],
+        selectedOptions[3],
       ]);
     } else {
       setSelectedOptions([
         selectedOptions[0],
         selectedOption as string,
         selectedOptions[2],
+        selectedOptions[3],
       ]);
     }
   };
@@ -107,20 +109,55 @@ const Filter = () => {
         let response;
 
         if (isBothSelected) {
-          const [bedrooms, project] = selectedOptions;
-          response = await axios.get(
-            `http://127.0.0.1:8000/propertiesByBedroomsAndProject/${project}/${bedrooms}`
-          );
+          const [bedrooms, project, location] = selectedOptions;
+
+          // Check if location is selected
+          const isLocation =
+            typeof location === "string" &&
+            [
+              "AL GHADEER - Abu Dhabi",
+              "Yas Island - Abu Dhabi",
+              "Saadiyat Island - Abu Dhabi",
+            ].includes(location);
+
+          if (isLocation) {
+            // Location is selected, call the property_list_by_bedrooms_and_location API
+            response = await axios.get(
+              `http://127.0.0.1:8000/property_list_by_bedrooms_and_location/${bedrooms}/${location}`
+            );
+          } else {
+            // Location is not selected, call the existing propertiesByBedroomsAndProject API
+            response = await axios.get(
+              `http://127.0.0.1:8000/propertiesByBedroomsAndProject/${project}/${bedrooms}`
+            );
+          }
         } else if (selectedOptions[0] !== false) {
           // Bedroom is selected
           response = await axios.get(
             `http://127.0.0.1:8000/propertiesByBedrooms/${selectedOptions[0]}/`
           );
         } else if (selectedOptions[1] !== false) {
-          // Project is selected
-          response = await axios.get(
-            `http://127.0.0.1:8000/propertiesByProject/${selectedOptions[1]}/`
-          );
+          const selectedOption = selectedOptions[1];
+
+          const isProject = [
+            "Alghadeer",
+            "Modern And Waterfront Living With Waters Edge",
+            "Ansam",
+            "Traditional And Modern Living With Alreeman - Aldar",
+            "Poolside Townhouses And Grand Views Of Lea Yas Island",
+          ].includes(selectedOption);
+
+          if (isProject) {
+            // Project is selected, call the project API
+            response = await axios.get(
+              `http://127.0.0.1:8000/propertiesByProject/${selectedOption}/`
+            );
+          } else {
+            // Location is selected, call the location API
+            response = await axios.get(
+              `http://127.0.0.1:8000/propertiesByLocation/${selectedOption}/`
+            );
+          }
         } else {
           // None is selected, reset the properties
           setFilteredProperties(properties);
@@ -159,7 +196,7 @@ const Filter = () => {
 
   const clearFilters = () => {
     setSelectedUnitType("");
-    setSelectedOptions([false, false, false]);
+    setSelectedOptions([false, false, false, false]);
     setFilteredProperties(properties);
     setFilterOn(true);
   };
@@ -179,6 +216,13 @@ const Filter = () => {
                 label="Destination"
                 isOpen={openDest}
                 toggleDropdown={toggleDestDropdown}
+                onChange={handleSelect}
+                options={[
+                  "AL GHADEER - Abu Dhabi",
+                  "Yas Island - Abu Dhabi",
+                  "Saadiyat Island - Abu Dhabi",
+                ]}
+                filterOn={filterOn}
               />
 
               <FilterDropdown
@@ -238,13 +282,18 @@ const Filter = () => {
                 icon={<LuSettings2 className="text-gray-500" size={25} />}
               />
             </div>
-
-            <FilterDropdown
-              label="Title (A-Z)"
-              isOpen={openDest}
-              toggleDropdown={toggleDestDropdown}
-              icon={<FaArrowsUpDown className="text-gray-500" size={25} />}
-            />
+            <div
+              className={`
+         bg-white flex justify-center items-center cursor-pointer w-full h-full`}
+              onClick={clearFilters}
+            >
+              <p
+                className="font-semibold text-black text-[15px] select-none 
+                hover:bg-gray-100 transition-all flex justify-center items-center w-full h-full"
+              >
+                Clear Filters
+              </p>
+            </div>
           </div>
         </div>
       </div>
@@ -269,6 +318,13 @@ const Filter = () => {
                 label="Destination"
                 isOpen={openDest}
                 toggleDropdown={toggleDestDropdown}
+                onChange={handleSelect}
+                options={[
+                  "AL GHADEER - Abu Dhabi",
+                  "Yas Island - Abu Dhabi",
+                  "Saadiyat Island - Abu Dhabi",
+                ]}
+                filterOn={filterOn}
               />
 
               <FilterDropdown
