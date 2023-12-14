@@ -72,20 +72,6 @@ const Filter = () => {
     fetchData();
   }, []);
 
-  useEffect(() => {
-    const filteredProperties = properties.filter((property) =>
-      selectedUnitType ? property.unitType === selectedUnitType : true
-    );
-
-    setFilteredProperties(filteredProperties);
-
-    const timeoutId = setTimeout(() => {
-      setResultsCount(filteredProperties.length);
-    }, 0);
-
-    return () => clearTimeout(timeoutId); // Cleanup function
-  }, [properties, selectedUnitType]);
-
   const handleUnitTypeSelect = (unitType: string) => {
     setSelectedUnitType(unitType);
   };
@@ -156,6 +142,20 @@ const Filter = () => {
 
     fetchData();
   }, [selectedOptions, filterOn, properties, selectedUnitType]);
+
+  useEffect(() => {
+    const filteredProperties = properties.filter((property) =>
+      selectedUnitType ? property.unitType === selectedUnitType : true
+    );
+
+    setFilteredProperties(filteredProperties);
+
+    const timeoutId = setTimeout(() => {
+      setResultsCount(filteredProperties.length);
+    }, 0);
+
+    return () => clearTimeout(timeoutId); // Cleanup function
+  }, [properties, selectedUnitType]);
 
   const clearFilters = () => {
     setSelectedUnitType("");
