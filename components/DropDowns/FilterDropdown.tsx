@@ -82,7 +82,7 @@ const FilterDropdown = ({
 
       {icon}
       {isOpen && (
-        <ul className="absolute top-[68px] -left-3 w-[300px] shadow-lg shadow-black/5 overflow-y-auto h-fit max-h-32 z-20">
+        <ul className="absolute top-[68px] -left-3 w-[300px] shadow-lg shadow-black/5 overflow-y-auto h-fit max-h-32 z-10">
           {options.map((option) => (
             <li
               key={option}
