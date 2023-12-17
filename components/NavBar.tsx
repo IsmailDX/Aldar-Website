@@ -12,6 +12,7 @@ import Hamburger from "hamburger-react";
 import { IoHomeOutline } from "react-icons/io5";
 import { RiContactsBook2Line } from "react-icons/ri";
 import { IoIosArrowForward } from "react-icons/io";
+import Link from "next/link";
 
 const links = [
   {
@@ -123,11 +124,15 @@ const NavBar = () => {
       <div className="w-full bg-black flex justify-center select-none">
         <div className="flex items-center w-full justify-between lg:px-14 px-1 max-w-[1600px]">
           <div className="flex items-center w-auto h-full">
-            <Image
-              src={Logo}
-              alt="Logo"
-              className="lg:w-[110px] lg:h-[110px] w-[80px] h-[80px]"
-            />
+            <Link href="/">
+              <Image
+                src={Logo}
+                alt="Logo"
+                width={500}
+                height={500}
+                className="lg:w-[110px] lg:h-[110px] w-[80px] h-[80px] object-contain"
+              />
+            </Link>
             <ul className="text-white list-none lg:flex hidden pl-4 h-full">
               {links.map((link) => (
                 <li

@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import { LuSettings2 } from "react-icons/lu";
 import FilterDropdown from "./DropDowns/FilterDropdown";
-import { FaArrowsUpDown } from "react-icons/fa6";
 import LogoFilter from "./LogoFilter";
 import { IoClose } from "react-icons/io5";
 import Properties from "./Property";
 import axios from "axios";
+import Link from "next/link";
 
 type Property = {
   id: number;
@@ -364,7 +363,9 @@ const Filter = () => {
           </p>
         ) : (
           filteredProperties.map((property) => (
-            <Properties key={property.id} property={property} />
+            <Link href={`/property/${property.id}`} key={property.id}>
+              <Properties key={property.id} property={property} />
+            </Link>
           ))
         )}
       </div>

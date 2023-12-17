@@ -65,7 +65,7 @@ const FilterDropdown = ({
   return (
     <div
       className="bg-white border-[1px] border-gray-400/20 py-5 flex lg:justify-center justify-between lg:px-0 md:px-10 px-5 items-center space-x-3 
-      cursor-pointer relative lg:w-[160px] w-full select-none"
+      cursor-pointer relative lg:w-[160px] md:w-full w-[90%] mx-auto select-none"
       onClick={toggleDropdown}
     >
       <p className="font-RobotoBold text-gray-500 text-[18px] select-none">
