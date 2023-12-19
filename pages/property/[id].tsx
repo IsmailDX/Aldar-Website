@@ -10,6 +10,7 @@ import { CiLocationOn } from "react-icons/ci";
 import UnitDetailsTemplate from "@/components/unitDetailsTemplate";
 import { FaArrowRightLong, FaMapLocationDot } from "react-icons/fa6";
 import { FaRegFilePdf } from "react-icons/fa6";
+import SwiperComponent2 from "@/components/SwiperComponent2";
 
 type Property = {
   id: number;
@@ -33,7 +34,7 @@ export default function PropertyDetails() {
   const router = useRouter();
   const { id } = router.query;
   const [properties, setProperties] = useState<Property[]>([]);
-  const [error, setError] = useState(false);
+  const [openSwiper, setOpenSwiper] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -43,14 +44,11 @@ export default function PropertyDetails() {
             `http://127.0.0.1:8000/allProperties/${id}/`
           );
           setProperties(response.data.properties);
-          setError(false);
         } else {
           console.error("Invalid or missing ID");
-          setError(true);
         }
       } catch (error) {
         console.error("Error fetching data:", error);
-        setError(true);
       }
     };
 
@@ -89,23 +87,26 @@ export default function PropertyDetails() {
   return (
     <>
       {properties.map((property) => (
-        <main className="mdplus:pt-36 pt-28" key={property.id}>
+        <main className="relative mdplus:pt-36 pt-28" key={property.id}>
           <Head>
             <title>{property.propertyName}</title>
           </Head>
-          <Link href="/">
-            <div
-              className="flex items-center space-x-2 bg-gray-300/30 w-fit p-4 hover:bg-gray-300/10 
+          <SwiperComponent2 property={property} />
+          <div
+            className="bg-gray-300/30 w-fit p-4 hover:bg-gray-300/10 
           transition-all duration-300"
-            >
+          >
+            <Link href="/" className="flex items-center space-x-2">
               <FaArrowLeftLong className="text-red-500" />
               <h1 className="font-RobotoBold">Back to Buying</h1>
-            </div>
-          </Link>
-
+            </Link>
+          </div>
           <div className="mb-14 mdplus:pt-10 pt-20 w-full relative overflow-hidden">
             <div className="absolute right-0 mdplus:top-[7%] md:top-[4%] top-[15%] bg-black w-[90%] h-[85%] -z-10" />
-            <div className="mdplus:grid grid-cols-4 gap-2 mt-10 2xl:h-[540px] h-[440px] hidden">
+            <div
+              className="mdplus:grid grid-cols-4 gap-2 mt-10 2xl:h-[540px] h-[440px] hidden"
+              onClick={() => setOpenSwiper(!openSwiper)}
+            >
               <Image
                 src={property.propertyPhoto}
                 alt="img1"
@@ -160,7 +161,6 @@ export default function PropertyDetails() {
               </button>
             </div>
           </div>
-
           <div className="w-full flex flex-col items-center">
             <div className="w-full 2xl:max-w-6xl lg:max-w-5xl lg:px-0 px-10">
               <div
