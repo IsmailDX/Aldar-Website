@@ -1,64 +1,101 @@
 import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Pagination } from "swiper/modules";
 import "swiper/css";
+import "swiper/css/effect-coverflow";
+import "swiper/css/navigation";
 import "swiper/css/pagination";
-import Image from "next/image";
+import { EffectCoverflow, Pagination, Navigation } from "swiper/modules";
+import Link from "next/link";
+import { IoIosArrowBack, IoIosArrowForward, IoIosClose } from "react-icons/io";
 
 type Property = {
   property: any;
+  state: boolean;
+  close: () => void;
 };
 
-const SwiperComponent2 = ({ property }: Property) => {
+const SwiperComponent2 = ({ property, state, close }: Property) => {
   return (
-    <div className="w-full h-[100dvh]">
-      <div>
+    <div
+      className={`left-0 right-0 w-full h-[100dvh] bg-black z-50 py-10 overflow-hidden flex-col justify-center ${
+        state ? "absolute" : "hidden"
+      }`}
+    >
+      <div className="w-fit h-fit cursor-pointer pl-5" onClick={close}>
+        <Link href={`/property/${property.id}`} passHref>
+          <div className="flex items-center">
+            <IoIosClose size={35} className="text-white" />
+            <h1 className="font-RobotoBold text-white">Close</h1>
+          </div>
+        </Link>
+      </div>
+
+      <div className="w-full h-full">
         <Swiper
-          slidesPerView={3}
+          slidesPerView={1}
           spaceBetween={30}
-          pagination={{
-            clickable: true,
+          effect={"coverflow"}
+          grabCursor={true}
+          centeredSlides={true}
+          coverflowEffect={{
+            rotate: 50,
+            stretch: 0,
+            depth: 100,
+            modifier: 1,
+            slideShadows: true,
+          }}
+          navigation={{
+            nextEl: ".button-next-slide",
+            prevEl: ".button-prev-slide",
           }}
           loop
-          modules={[Pagination]}
-          className="mySwiper"
+          pagination={{
+            type: "fraction",
+          }}
+          modules={[Navigation, EffectCoverflow, Pagination]}
+          className="mySwiper2"
+          breakpoints={{
+            // when window width is >= 640px
+            1000: {
+              slidesPerView: 2,
+              spaceBetween: 40,
+            },
+          }}
         >
-          <SwiperSlide>
-            <Image
+          <SwiperSlide className="swiper-slide2">
+            <img
               src={property.propertyPhoto}
               alt="img1"
-              width={500}
-              height={500}
               className="w-full h-full object-cover col-span-2"
             />
           </SwiperSlide>
-          <SwiperSlide>
-            <Image
+          <SwiperSlide className="swiper-slide2">
+            <img
               src={property.propertyPhoto}
               alt="img1"
-              width={500}
-              height={500}
               className="w-full h-full object-cover col-span-2"
             />
           </SwiperSlide>
-          <SwiperSlide>
-            <Image
+          <SwiperSlide className="swiper-slide2">
+            <img
               src={property.propertyPhoto}
               alt="img1"
-              width={500}
-              height={500}
               className="w-full h-full object-cover col-span-2"
             />
           </SwiperSlide>
-          <SwiperSlide>
-            <Image
+          <SwiperSlide className="swiper-slide2">
+            <img
               src={property.propertyPhoto}
               alt="img1"
-              width={500}
-              height={500}
               className="w-full h-full object-cover col-span-2"
             />
           </SwiperSlide>
+          <div className="top-[50%] absolute z-50 button-next-slide right-0 duration-500 cursor-pointer">
+            <IoIosArrowForward className="text-white md:w-[60px] md:h-[60px] w-[40px] h-[40px]" />
+          </div>
+          <div className="top-[50%] absolute z-50 button-prev-slide left-0 duration-500 cursor-pointer">
+            <IoIosArrowBack className="text-white md:w-[60px] md:h-[60px] w-[40px] h-[40px]" />
+          </div>
         </Swiper>
       </div>
     </div>
