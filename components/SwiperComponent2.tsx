@@ -64,28 +64,28 @@ const SwiperComponent2 = ({ property, state, close }: Property) => {
         >
           <SwiperSlide className="swiper-slide2">
             <img
-              src={property.propertyPhoto}
+              src={property.propertyPhoto1}
               alt="img1"
               className="w-full h-full object-cover col-span-2"
             />
           </SwiperSlide>
           <SwiperSlide className="swiper-slide2">
             <img
-              src={property.propertyPhoto}
+              src={property.propertyPhoto2}
               alt="img1"
               className="w-full h-full object-cover col-span-2"
             />
           </SwiperSlide>
           <SwiperSlide className="swiper-slide2">
             <img
-              src={property.propertyPhoto}
+              src={property.propertyPhoto3}
               alt="img1"
               className="w-full h-full object-cover col-span-2"
             />
           </SwiperSlide>
           <SwiperSlide className="swiper-slide2">
             <img
-              src={property.propertyPhoto}
+              src={property.propertyPhoto4}
               alt="img1"
               className="w-full h-full object-cover col-span-2"
             />

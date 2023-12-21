@@ -14,9 +14,8 @@ type Property = {
   project: string;
   unitType: string;
   bedrooms: number;
-  carParking: number;
   unitSize: number;
-  propertyPhoto: string;
+  propertyPhoto1: string;
 };
 
 interface PropertyProps {
@@ -103,7 +102,7 @@ const Property = ({ property }: PropertyProps) => {
       <div className="w-full absolute 2xl:-right-[80%] lg:-right-[60%] -right-[10%] lg:bottom-0 top-5">
         <div className="lg:w-[500px] w-[100%] lg:h-[400px] h-[220px] relative">
           <Image
-            src={property.propertyPhoto}
+            src={property.propertyPhoto1}
             alt="property"
             sizes="100%"
             fill

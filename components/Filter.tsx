@@ -17,7 +17,10 @@ type Property = {
   bedrooms: number;
   carParking: number;
   unitSize: number;
-  propertyPhoto: string;
+  propertyPhoto1: string;
+  propertyPhoto2: string;
+  propertyPhoto3: string;
+  propertyPhoto4: string;
 };
 
 interface ApiResponse {
@@ -115,8 +118,8 @@ const Filter = () => {
             typeof location === "string" &&
             [
               "AL GHADEER - Abu Dhabi",
+              "Al Reem Island - Abu Dhabi",
               "Yas Island - Abu Dhabi",
-              "Saadiyat Island - Abu Dhabi",
             ].includes(location);
 
           if (isLocation) {
@@ -140,10 +143,8 @@ const Filter = () => {
 
           const isProject = [
             "Alghadeer",
-            "Modern And Waterfront Living With Waters Edge",
-            "Ansam",
-            "Traditional And Modern Living With Alreeman - Aldar",
-            "Poolside Townhouses And Grand Views Of Lea Yas Island",
+            "Reflection, Al Reem",
+            "The Bridges",
           ].includes(selectedOption);
 
           if (isProject) {
@@ -218,8 +219,8 @@ const Filter = () => {
                 onChange={handleSelect}
                 options={[
                   "AL GHADEER - Abu Dhabi",
+                  "Al Reem Island - Abu Dhabi",
                   "Yas Island - Abu Dhabi",
-                  "Saadiyat Island - Abu Dhabi",
                 ]}
                 filterOn={filterOn}
               />
@@ -229,13 +230,7 @@ const Filter = () => {
                 isOpen={openPro}
                 toggleDropdown={toggleProDropdown}
                 onChange={handleSelect}
-                options={[
-                  "Alghadeer",
-                  "Modern And Waterfront Living With Waters Edge",
-                  "Ansam",
-                  "Traditional And Modern Living With Alreeman - Aldar",
-                  "Poolside Townhouses And Grand Views Of Lea Yas Island",
-                ]}
+                options={["Alghadeer", "Reflection, Al Reem", "The Bridges"]}
                 filterOn={filterOn}
               />
 

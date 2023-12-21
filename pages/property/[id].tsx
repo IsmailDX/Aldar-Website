@@ -22,7 +22,10 @@ type Property = {
   bedrooms: number;
   carParking: number;
   unitSize: number;
-  propertyPhoto: string;
+  propertyPhoto1: string;
+  propertyPhoto2: string;
+  propertyPhoto3: string;
+  propertyPhoto4: string;
   bathrooms: number;
 };
 
@@ -120,7 +123,7 @@ export default function PropertyDetails() {
                 onClick={() => setOpenSwiper(true)}
               >
                 <Image
-                  src={property.propertyPhoto}
+                  src={property.propertyPhoto1}
                   alt="img1"
                   width={500}
                   height={500}
@@ -128,7 +131,7 @@ export default function PropertyDetails() {
                 />
 
                 <Image
-                  src={property.propertyPhoto}
+                  src={property.propertyPhoto2}
                   alt="img2"
                   width={500}
                   height={500}
@@ -137,7 +140,7 @@ export default function PropertyDetails() {
 
                 <div className="col-span-1 flex flex-col gap-2">
                   <Image
-                    src={property.propertyPhoto}
+                    src={property.propertyPhoto3}
                     alt="img3"
                     width={500}
                     height={500}
@@ -146,7 +149,7 @@ export default function PropertyDetails() {
 
                   <div className="w-full h-full relative flex justify-center">
                     <Image
-                      src={property.propertyPhoto}
+                      src={property.propertyPhoto4}
                       alt="img4"
                       width={500}
                       height={500}
@@ -164,7 +167,7 @@ export default function PropertyDetails() {
                 onClick={() => setOpenSwiper(true)}
               >
                 <Image
-                  src={property.propertyPhoto}
+                  src={property.propertyPhoto4}
                   alt="img5"
                   width={500}
                   height={500}
