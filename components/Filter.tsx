@@ -60,7 +60,7 @@ const Filter = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get<ApiResponse>(
-          "http://127.0.0.1:8000/allProperties/"
+          "https://aldar-backend.onrender.com/allProperties/"
         );
         setProperties(response.data.properties);
       } catch (error) {
@@ -122,18 +122,18 @@ const Filter = () => {
           if (isLocation) {
             // Location is selected, call the property_list_by_bedrooms_and_location API
             response = await axios.get(
-              `http://127.0.0.1:8000/property_list_by_bedrooms_and_location/${bedrooms}/${location}`
+              `https://aldar-backend.onrender.com/property_list_by_bedrooms_and_location/${bedrooms}/${location}`
             );
           } else {
             // Location is not selected, call the existing propertiesByBedroomsAndProject API
             response = await axios.get(
-              `http://127.0.0.1:8000/propertiesByBedroomsAndProject/${project}/${bedrooms}`
+              `https://aldar-backend.onrender.com/propertiesByBedroomsAndProject/${project}/${bedrooms}`
             );
           }
         } else if (selectedOptions[0] !== false) {
           // Bedroom is selected
           response = await axios.get(
-            `http://127.0.0.1:8000/propertiesByBedrooms/${selectedOptions[0]}/`
+            `https://aldar-backend.onrender.com/propertiesByBedrooms/${selectedOptions[0]}/`
           );
         } else if (selectedOptions[1] !== false) {
           const selectedOption = selectedOptions[1];
@@ -149,12 +149,12 @@ const Filter = () => {
           if (isProject) {
             // Project is selected, call the project API
             response = await axios.get(
-              `http://127.0.0.1:8000/propertiesByProject/${selectedOption}/`
+              `https://aldar-backend.onrender.com/propertiesByProject/${selectedOption}/`
             );
           } else {
             // Location is selected, call the location API
             response = await axios.get(
-              `http://127.0.0.1:8000/propertiesByLocation/${selectedOption}/`
+              `https://aldar-backend.onrender.com/propertiesByLocation/${selectedOption}/`
             );
           }
         } else {

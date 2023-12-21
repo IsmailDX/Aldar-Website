@@ -41,7 +41,7 @@ export default function PropertyDetails() {
       try {
         if (id) {
           const response = await axios.get<ApiResponse>(
-            `http://127.0.0.1:8000/allProperties/${id}/`
+            `https://aldar-backend.onrender.com/allProperties/${id}/`
           );
           setProperties(response.data.properties);
         } else {
