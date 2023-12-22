@@ -120,7 +120,7 @@ const NavBar = () => {
   };
 
   return (
-    <div className="w-full h-fit fixed z-20">
+    <nav className="w-full h-fit fixed z-20">
       <div className="w-full bg-black flex justify-center select-none">
         <div className="flex items-center w-full justify-between lg:px-14 px-1 max-w-[1600px]">
           <div className="flex items-center w-auto h-full">
@@ -248,7 +248,7 @@ const NavBar = () => {
           ))}
         </ul>
       </div>
-    </div>
+    </nav>
   );
 };
 

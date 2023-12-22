@@ -6,7 +6,7 @@ import Head from "next/head";
 
 const Home = () => {
   return (
-    <>
+    <main>
       <Head>
         <title>Aldar Home Page</title>
         <meta
@@ -28,7 +28,7 @@ const Home = () => {
       <SwiperComponent />
       <SectionTwo />
       <Filter />
-    </>
+    </main>
   );
 };
 export default Home;

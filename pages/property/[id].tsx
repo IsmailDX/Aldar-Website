@@ -52,40 +52,36 @@ export default function PropertyDetails() {
         }
       } catch (error) {
         console.error("Error fetching data:", error);
+        return (
+          <AnimatedContainer
+            initialClassName="opacity-0"
+            transitionClassName="transition-all duration-1000 delay-500"
+            whileInViewClassName="opacity-100"
+            className="w-full h-[100dvh] anim"
+            once
+          >
+            <Head>
+              <title>Property Details</title>
+            </Head>
+            <div className="md:pt-[10%] pt-[30%] flex flex-col justify-center items-center -space-y-2 text-gray-500">
+              <p className="text-center text-[30px] font-RobotoBold">Oops!</p>
+              <p className="text-center text-[30px] font-RobotoBold">
+                House not found :/
+              </p>
+              <Image
+                src={"/images/housenotfound.webp"}
+                alt="house not found"
+                width={500}
+                height={500}
+              />
+            </div>
+          </AnimatedContainer>
+        );
       }
     };
 
     fetchData();
   }, [id]);
-
-  if (properties.length === 0) {
-    // Handle the case where the house with the specified 'id' is not found
-    return (
-      <AnimatedContainer
-        initialClassName="opacity-0"
-        transitionClassName="transition-all duration-1000 delay-500"
-        whileInViewClassName="opacity-100"
-        className="w-full h-[100dvh] anim"
-        once
-      >
-        <Head>
-          <title>Property Details</title>
-        </Head>
-        <div className="md:pt-[10%] pt-[30%] flex flex-col justify-center items-center -space-y-2 text-gray-500">
-          <p className="text-center text-[30px] font-RobotoBold">Oops!</p>
-          <p className="text-center text-[30px] font-RobotoBold">
-            House not found :/
-          </p>
-          <Image
-            src={"/images/housenotfound.webp"}
-            alt="house not found"
-            width={500}
-            height={500}
-          />
-        </div>
-      </AnimatedContainer>
-    );
-  }
 
   const closeFunction = () => {
     setOpenSwiper(false);
