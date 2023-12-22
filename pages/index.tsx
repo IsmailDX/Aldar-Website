@@ -22,10 +22,7 @@ const Home = () => {
           property="og:description"
           content="Check out the best properties with aldar properties. The best offers and greatest deals are waiting for you."
         />
-        <meta
-          property="og:image"
-          content="https://cdn.aldar.com/-/media/project/aldar-tenant/aldar2/images/brandhub/logo-black.svg?rev=a1b383f772e94d4d82d58562d52a81a5&extension="
-        />
+        <meta property="og:image" content="websiteImages/logo.png" />
       </Head>
 
       <SwiperComponent />
