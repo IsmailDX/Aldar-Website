@@ -209,14 +209,14 @@ const Filter = () => {
   return (
     <div className={`${openFilterPage ? "h-[100dvh] relative" : "h-full"}`}>
       <div className="flex justify-center">
-        <div className="max-w-[1100px] w-[100%] lg:shadow-lg shadow-black/5 flex flex-col relative lg:pl-10 px-0 py-7 space-y-9 overflow-hidden">
+        <div className="max-w-[1100px] w-[100%] lg:shadow-lg shadow-black/5 flex flex-col relative lg:pl-10 px-0 py-7 space-y-9">
           <LogoFilter onSelect={handleUnitTypeSelect} />
 
           <div className="lg:flex hidden items-center relative justify-between">
             <AnimatedContainer
-              initialClassName="translate-y-[500px]"
+              initialClassName="translate-y-[400px] opacity-0"
               transitionClassName="transition-all duration-700"
-              whileInViewClassName="translate-y-0"
+              whileInViewClassName="translate-y-0 opacity-100"
               className=""
               once
             >
