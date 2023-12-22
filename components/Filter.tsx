@@ -6,6 +6,7 @@ import { IoClose } from "react-icons/io5";
 import Properties from "./Property";
 import axios from "axios";
 import Link from "next/link";
+import AnimatedContainer from "./shared/AnimatedContainer";
 
 type Property = {
   id: number;
@@ -208,85 +209,121 @@ const Filter = () => {
   return (
     <div className={`${openFilterPage ? "h-[100dvh] relative" : "h-full"}`}>
       <div className="flex justify-center">
-        <div className="max-w-[1100px] w-[100%] lg:shadow-lg shadow-black/5 flex flex-col relative lg:pl-10 px-0 py-7 space-y-9">
+        <div className="max-w-[1100px] w-[100%] lg:shadow-lg shadow-black/5 flex flex-col relative lg:pl-10 px-0 py-7 space-y-9 overflow-hidden">
           <LogoFilter onSelect={handleUnitTypeSelect} />
+
           <div className="lg:flex hidden items-center relative justify-between">
-            <div className="flex">
-              <FilterDropdown
-                label="Destination"
-                isOpen={openDest}
-                toggleDropdown={toggleDestDropdown}
-                onChange={handleSelect}
-                options={[
-                  "AL GHADEER - Abu Dhabi",
-                  "Al Reem Island - Abu Dhabi",
-                  "Yas Island - Abu Dhabi",
-                ]}
-                filterOn={filterOn}
-              />
+            <AnimatedContainer
+              initialClassName="translate-y-[500px]"
+              transitionClassName="transition-all duration-700"
+              whileInViewClassName="translate-y-0"
+              className=""
+              once
+            >
+              <div className="flex">
+                <FilterDropdown
+                  label="Destination"
+                  isOpen={openDest}
+                  toggleDropdown={toggleDestDropdown}
+                  onChange={handleSelect}
+                  options={[
+                    "AL GHADEER - Abu Dhabi",
+                    "Al Reem Island - Abu Dhabi",
+                    "Yas Island - Abu Dhabi",
+                  ]}
+                  filterOn={filterOn}
+                />
 
-              <FilterDropdown
-                label="Project"
-                isOpen={openPro}
-                toggleDropdown={toggleProDropdown}
-                onChange={handleSelect}
-                options={["Alghadeer", "Reflection, Al Reem", "The Bridges"]}
-                filterOn={filterOn}
-              />
+                <FilterDropdown
+                  label="Project"
+                  isOpen={openPro}
+                  toggleDropdown={toggleProDropdown}
+                  onChange={handleSelect}
+                  options={["Alghadeer", "Reflection, Al Reem", "The Bridges"]}
+                  filterOn={filterOn}
+                />
 
-              <FilterDropdown
-                label="Bedrooms"
-                isOpen={openBedrooms}
-                toggleDropdown={toggleBedroomsDropdown}
-                onChange={handleSelect}
-                options={[1, 2, 3, 4, 5]}
-                filterOn={filterOn}
-              />
-            </div>
-            <div className="flex items-center pr-10 space-x-2">
-              <div
-                className={`
-         bg-white flex justify-center items-center cursor-pointer`}
-                onClick={clearFilters}
-              >
-                <p
-                  className="font-semibold text-black text-[15px] select-none 
-                hover:bg-gray-100 transition-all p-5"
+                <FilterDropdown
+                  label="Bedrooms"
+                  isOpen={openBedrooms}
+                  toggleDropdown={toggleBedroomsDropdown}
+                  onChange={handleSelect}
+                  options={[1, 2, 3, 4, 5]}
+                  filterOn={filterOn}
+                />
+              </div>
+            </AnimatedContainer>
+
+            <AnimatedContainer
+              initialClassName="translate-x-[500px]"
+              transitionClassName="transition-all duration-700"
+              whileInViewClassName="translate-x-0"
+              className=""
+              once
+            >
+              <div className="flex items-center pr-10 space-x-2">
+                <div
+                  className={`
+                  bg-white flex justify-center items-center cursor-pointer`}
+                  onClick={clearFilters}
                 >
-                  Clear Filters
-                </p>
+                  <p
+                    className="font-semibold text-black text-[15px] select-none 
+                hover:bg-gray-100 transition-all p-5"
+                  >
+                    Clear Filters
+                  </p>
+                </div>
+                <div className="flex w-fit bg-gray-900 mr-10 justify-center items-center">
+                  <p className="p-5 font-RobotoBold text-white ">
+                    Show ({resultsCount}) Results
+                  </p>
+                </div>
               </div>
-              <div className="flex w-fit bg-gray-900 mr-10 justify-center items-center">
-                <p className="p-5 font-RobotoBold text-white ">
-                  Show ({resultsCount}) Results
-                </p>
-              </div>
-            </div>
+            </AnimatedContainer>
           </div>
 
           {/* Mobile */}
+
           <div className="flex lg:hidden w-full">
-            <div
+            <AnimatedContainer
+              initialClassName="translate-x-[-500px]"
+              transitionClassName="transition-all duration-700"
+              whileInViewClassName="translate-x-0"
               className="w-full"
-              onClick={() => setOpenFilterPage(!openFilterPage)}
+              once
             >
-              <FilterDropdown
-                label="Filters"
-                isOpen={openDest}
-                icon={<LuSettings2 className="text-gray-500" size={25} />}
-              />
-            </div>
+              <div
+                className="w-full"
+                onClick={() => setOpenFilterPage(!openFilterPage)}
+              >
+                <FilterDropdown
+                  label="Filters"
+                  isOpen={openDest}
+                  icon={<LuSettings2 className="text-gray-500" size={25} />}
+                />
+              </div>
+            </AnimatedContainer>
+
             <div
               className={`
          bg-white flex justify-center items-center cursor-pointer w-full h-full`}
               onClick={clearFilters}
             >
-              <p
-                className="font-semibold text-black text-[15px] select-none 
-                hover:bg-gray-100 transition-all flex justify-center items-center w-full h-full"
+              <AnimatedContainer
+                initialClassName="translate-x-[500px]"
+                transitionClassName="transition-all duration-700"
+                whileInViewClassName="translate-x-0"
+                className=""
+                once
               >
-                Clear Filters
-              </p>
+                <p
+                  className="font-semibold text-black text-[15px] select-none 
+                hover:bg-gray-100 transition-all flex justify-center items-center w-full h-full"
+                >
+                  Clear Filters
+                </p>
+              </AnimatedContainer>
             </div>
           </div>
         </div>
@@ -349,9 +386,17 @@ const Filter = () => {
         </div>
       )}
       <div className="w-full flex flex-col justify-center py-20 2xl:max-w-[1200px] lg:max-w-[1000px] md:max-w-[700px] mx-auto space-y-10 overflow-hidden">
-        <h1 className="text-[35px] font-RobotoBold pb-10 md:pl-0 pl-5">
-          {selectedUnitType || "All Properties"}
-        </h1>
+        <AnimatedContainer
+          initialClassName="opacity-0"
+          transitionClassName="transition-all duration-700"
+          whileInViewClassName="opacity-100"
+          className=""
+          once
+        >
+          <h1 className="text-[35px] font-RobotoBold pb-10 md:pl-0 pl-5">
+            {selectedUnitType || "All Properties"}
+          </h1>
+        </AnimatedContainer>
         {filteredProperties.length === 0 ? (
           <p className="text-center text-gray-500 text-[20px] font-RobotoBold">
             Sorry, no properties match your selected filters.
@@ -359,7 +404,15 @@ const Filter = () => {
         ) : (
           filteredProperties.map((property) => (
             <Link href={`/property/${property.id}`} key={property.id}>
-              <Properties key={property.id} property={property} />
+              <AnimatedContainer
+                initialClassName="translate-x-[500px]"
+                transitionClassName="transition-all duration-700"
+                whileInViewClassName="translate-x-0"
+                className=""
+                once
+              >
+                <Properties key={property.id} property={property} />
+              </AnimatedContainer>
             </Link>
           ))
         )}

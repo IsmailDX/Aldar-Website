@@ -13,6 +13,8 @@ import { IoHomeOutline } from "react-icons/io5";
 import { RiContactsBook2Line } from "react-icons/ri";
 import { IoIosArrowForward } from "react-icons/io";
 import Link from "next/link";
+import AnimatedContainer from "./shared/AnimatedContainer";
+import { motion } from "framer-motion";
 
 const links = [
   {
@@ -71,6 +73,23 @@ const links = [
   },
 ];
 
+const listVariants = {
+  hidden: {
+    x: "30vh",
+    opacity: 0,
+  },
+  visible: (index: number) => ({
+    x: 0,
+    opacity: 100,
+    transition: {
+      duration: 0.5,
+      type: "spring",
+      ease: "easeIn",
+      delay: index * 0.1,
+    },
+  }),
+};
+
 const NavBar = () => {
   const [hoveredLink, setHoveredLink] = useState<string | null>(null);
   const [hoveredOptions, setHoveredOptions] = useState<
@@ -125,20 +144,32 @@ const NavBar = () => {
         <div className="flex items-center w-full justify-between lg:px-14 px-1 max-w-[1600px]">
           <div className="flex items-center w-auto h-full">
             <Link href="/">
-              <Image
-                src={Logo}
-                alt="Logo"
-                width={500}
-                height={500}
-                className="lg:w-[110px] lg:h-[110px] w-[80px] h-[80px] object-contain"
-              />
+              <AnimatedContainer
+                initialClassName="opacity-0"
+                transitionClassName="transition-all duration-500"
+                whileInViewClassName="opacity-100"
+                className=""
+                once
+              >
+                <Image
+                  src={Logo}
+                  alt="Logo"
+                  width={500}
+                  height={500}
+                  className="lg:w-[110px] lg:h-[110px] w-[80px] h-[80px] object-contain"
+                />
+              </AnimatedContainer>
             </Link>
             <ul className="text-white list-none lg:flex hidden pl-4 h-full">
-              {links.map((link) => (
-                <li
-                  key={link.text}
+              {links.map((link, index) => (
+                <motion.li
+                  key={index}
                   className="nav mx-5 relative group"
                   onMouseEnter={() => setHoveredLink(link.text)}
+                  variants={listVariants}
+                  initial="hidden"
+                  animate="visible"
+                  custom={index}
                 >
                   <a
                     href={link.link}
@@ -146,7 +177,7 @@ const NavBar = () => {
                   >
                     {link.text}
                   </a>
-                </li>
+                </motion.li>
               ))}
             </ul>
           </div>
