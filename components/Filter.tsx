@@ -429,6 +429,19 @@ const Filter = () => {
                 Please wait few seconds
               </h1>
             </AnimatedContainer>
+            <AnimatedContainer
+              initialClassName="opacity-0"
+              transitionClassName="transition-all duration-700 delay-[12s]"
+              whileInViewClassName="opacity-100"
+              className=""
+              once
+            >
+              <h1 className="font-RobotoBold text-[12px] animate-pulse">
+                Properties take a moment due to cloud storage with occasional
+                downtime in my free trial. Please wait or refresh. Thank you for
+                your understanding and patience!
+              </h1>
+            </AnimatedContainer>
           </div>
         )}
 
