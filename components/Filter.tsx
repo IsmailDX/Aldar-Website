@@ -436,7 +436,7 @@ const Filter = () => {
               className=""
               once
             >
-              <h1 className="font-RobotoBold text-[12px] animate-pulse">
+              <h1 className="font-RobotoBold text-[12px] animate-pulse text-center">
                 Properties take a moment due to cloud storage with occasional
                 downtime in my free trial. Please wait or refresh. Thank you for
                 your understanding and patience!
