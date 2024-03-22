@@ -65,7 +65,7 @@ const Filter = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get<ApiResponse>(
-          "https://aldar-backend.onrender.com/allProperties/"
+          "http://127.0.0.1:8000/allProperties/"
         );
         setProperties(response.data.properties);
       } catch (error) {
